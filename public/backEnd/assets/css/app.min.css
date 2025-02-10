@@ -1755,7 +1755,8 @@ body {
     padding: 0;
 }
 #sidebar-menu > ul > li > a {
-    color: var(--ct-menu-item);
+    /* color: var(--ct-menu-item); */
+    color:#fff;
     display: block;
     padding: 12px 20px;
     position: relative;

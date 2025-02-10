@@ -3233,8 +3233,8 @@ li.cat_bar {
 }
 
 .main-header .menu-area .cat_bar.active .Cat_menu {
-    visibility: visible;
-    opacity: 1;
+    visibility: hidden;
+    opacity: 0;
 }
 
 .fixed-top .menu-area .cat_bar.active .Cat_menu {

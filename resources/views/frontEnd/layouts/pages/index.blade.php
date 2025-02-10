@@ -12,6 +12,13 @@
 <meta property="og:description" content="{{ $generalsetting->meta_description }}" />
 @endpush
 @push('css')
+<style>
+    .main-header .menu-area .cat_bar.active .Cat_menu {
+    visibility: visible;
+    opacity: 1;
+}
+
+</style>
 <link rel="stylesheet" href="{{ asset('public/frontEnd/css/owl.carousel.min.css') }}" />
 <link rel="stylesheet" href="{{ asset('public/frontEnd/css/owl.theme.default.min.css') }}" />
 <link href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.5.2/animate.css" rel="stylesheet" />

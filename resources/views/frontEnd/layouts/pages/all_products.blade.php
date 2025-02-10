@@ -1,14 +1,5 @@
 @extends('frontEnd.layouts.master') @section('title', 'Shopping Cart') @section('content')
-@push('css')
-    <style>
-        .main-header .menu-area .cat_bar.active .Cat_menu {
-            visibility: hidden;
-            opacity: 0;
-        }
-
-        
-    </style>
-@endpush
+ 
 
 <div class="bg-whtie py-3" style="background:#fff;">
     <div class="container">

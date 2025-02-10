@@ -176,7 +176,7 @@ class FrontendController extends Controller
     }
 
 
-    public function allProducts(){ 
+    public function allProducts(){  
         $products = Product::where('status', 1)->with('category')->paginate(50);
         return view('frontEnd.layouts.pages.all_products', compact('products'));
     }
