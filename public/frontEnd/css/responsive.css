@@ -72,14 +72,15 @@
         background: #fff;
     }
     .filter_sidebar.active {
-        background: #fff;
+        background: #938f8f;
         z-index: 9999;
         height: 100%;
-        width: 97%;
-        top: 2px;
+        width: 100%;
+        top: 0;
         visibility: visible;
         opacity: 1;
         overflow-y: auto;
+        left: 0;
     }
     .filter_sidebar.active::-webkit-scrollbar-track
     {
