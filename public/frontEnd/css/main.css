@@ -1,7 +1,16 @@
 :root {
-    --bg-primary: #f28743;
-    --bg-secondary: #0066ab;
+    --bg-primary: #0C090A;
+    --bg-secondary: #2554C7;
 }
+
+.main-search form button{
+    background-color: var(--bg-primary) !important; 
+}
+
+.main-search form{
+    border-color: var(--bg-primary) !important; 
+}
+
 
 .main-header {
     background: var(--bg-secondary);
@@ -313,9 +322,9 @@ i.fa-solid.fa-border-all.all__product {
 }
 
 
-ul.Cat_menu {
+/* ul.Cat_menu {
     height: 429px;
-}
+} */
 
 .container {
     max-width: 100% !important;
@@ -329,9 +338,8 @@ ul.Cat_menu {
 
 
 .best_selling_sec {
-    margin-top: 442px !important;
+    margin-top: 552px !important;
 }
-
 
 li.Cat_list.cat_list_hover img {
     width: 22px;

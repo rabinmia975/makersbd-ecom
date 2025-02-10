@@ -38,6 +38,9 @@
               -webkit-transform: translateY(-125%);
               opacity: 0.55
             }
+            .hidden-category {
+                display: none;
+            }
         </style>
 
         <meta name="facebook-domain-verification" content="38f1w8335btoklo88dyfl63ba3st2e" />
@@ -305,79 +308,63 @@
                                                 <i class="fa-solid fa-bars"></i>
                                                 <span class="cat_head">All Category</span>
                                             </a>
-                                            <ul class="Cat_menu">
-                                                <li class="Cat_list">
-                                                    <a href="{{ route('all.products') }}">
-                                                        <i class="fa-solid fa-border-all"></i>
-                                                        <span>All Product</span>
-                                                    </a>
-                                                </li>
-                                                <li class="Cat_list cat_list_hover">
-                                                    <a href="#">
-                                                        <img src="category-image.webp" alt="">
-                                                        <span>Voltmeter & Testers</span>
-                                                    </a>
-                                                </li>
-                                                <li class="Cat_list cat_list_hover">
-                                                    <a href="#">
-                                                        <img src="category-image.webp" alt="">
-                                                        <span>Modules Collection</span>
-                                                        <i class="fa-solid fa-chevron-right cat_down"></i>
-                                                    </a>
-                                                    <ul class="child_menu">
-                                                        <li class="child_main"><a href="#">Power Bank Circuit</a></li>
-                                                        <li class="child_main"><a href="#">Popular Modules</a></li>
-                                                        <li class="child_main"><a href="#">BMS-Battery Management</a></li>
-                                                        <li class="child_main"><a href="#">Buck-Boost Converter</a></li>
-                                                    </ul>
-                                                </li>
-                                                <li class="Cat_list cat_list_hover">
-                                                    <a href="#">
-                                                        <img src="category-image.webp" alt="">
-                                                        <span>Amplifier & Speaker</span>
-                                                    </a>
-                                                </li>
-                                                <li class="Cat_list cat_list_hover">
-                                                    <a href="#">
-                                                        <img src="category-image.webp" alt="">
-                                                        <span>Diy Project Package</span>
-                                                    </a>
-                                                </li>
-                                                <li class="Cat_list cat_list_hover">
-                                                    <a href="#">
-                                                        <img src="category-image.webp" alt="">
-                                                        <span>Battery & Charger</span>
-                                                    </a>
-                                                </li>
-                                                <li class="Cat_list cat_list_hover">
-                                                    <a href="#">
-                                                        <img src="category-image.webp" alt="">
-                                                        <span>Arduino & Raspberry PI</span>
-                                                        <i class="fa-solid fa-chevron-right cat_down"></i>
-                                                    </a>
-                                                    <ul class="child_menu">
-                                                        <li class="child_main"><a href="#">Arduino Boards</a></li>
-                                                        <li class="child_main"><a href="#">Raspberry PI Boards</a></li>
-                                                    </ul>
-                                                </li>
-                                                <li class="Cat_list cat_list_hover over_list">
-                                                    <a href="#">
-                                                        <img src="category-image.webp" alt="">
-                                                        <span>Gadget Zone</span>
-                                                    </a>
-                                                </li>  
-                                                <li class="Cat_list cat_list_hover over_list">
-                                                    <a href="#">
-                                                        <img src="category-image.webp" alt="">
-                                                        <span>Gadget Zone</span>
-                                                    </a>
-                                                </li>  
-                                            </ul>
+                                            @if ($menucategories) 
+                                                <ul class="Cat_menu">
+                                                    <li class="Cat_list">
+                                                        <a href="{{ route('all.products') }}">
+                                                            <i class="fa-solid fa-border-all"></i>
+                                                            <span>All Product</span>
+                                                        </a>
+                                                    </li>
+                                                    @foreach($menucategories as $key => $scategory)
+                                                    <li class="Cat_list cat_list_hover {{ $key >= 10 ? 'hidden-category' : '' }}">
+                                                        <a href="{{url('category/'.$scategory->slug)}}">
+                                                            <img src="{{asset($scategory->image)}}" alt="{{$scategory->name}}" class="" />
+                                                            <span> {{$scategory->name}}</span>
+                                                            @if($scategory->subcategories->count() > 0)
+                                                                <i class="fa-solid fa-chevron-right cat_down mt-1"></i>
+                                                            @endif
+                                                        </a>
+                                                        <ul class="child_menu">
+                                                            @foreach($scategory->subcategories as $subcategory)
+                                                            <li class="child_main"><a href="{{url('subcategory/'.$subcategory->slug)}}">        {{$subcategory->subcategoryName}}</a></li> 
+                                                            @endforeach
+                                                        </ul>
+                                                    </li>
+                                                    @endforeach
+                                                    <li>
+                                                        <a href="javascript:void(0)" class="showMore"> 
+                                                            <div class="d-flex justify-content-between align-items-center">
+                                                            <span> Show More</span>
+                                                            <span>
+                                                                <i class="fa fa-angle-double-down"></i>
+                                                            </span>
+                                                        </div>
+                                                        </a>
+                                                    </li>
+                                                    <li>
+                                                        <a href="javascript:void(0)" class="showLess" style="display: none;"> 
+                                                            <div class="d-flex justify-content-between align-items-center">
+                                                                <span>Show Less</span>
+                                                                <span>
+                                                                    <i class="fa fa-angle-double-up"></i>
+                                                                </span>
+                                                            </div>
+                                                        </a>
+                                                    </li>
+                                                </ul>
+                                            @endif
                                         </li>
-
+                                        
+                                         
                                         <li class="active"><a  href="{{ route('home') }}" class="hover_effect active">Home</a></li>
                                         <li><a href="{{ route('all.products') }}" class="hover_effect">All Products</a></li>
-                                       
+                                        <li class="parent-category">
+                                            <a href="{{route('customer.order_track')}}" class="menu-category-name">
+                                                Order Track
+                                            </a>
+                                        </li>
+
                                     </ul>
                                 </div>
 
@@ -1140,7 +1127,23 @@
         height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
         <!-- End Google Tag Manager (noscript) -->
 
- 
+        <script>
+            $(document).ready(function() {
+                $(".hidden-category").hide(); // Initially hide categories beyond 10
+            
+                $(".showMore").click(function() {
+                    $(".hidden-category").slideDown(); // Show hidden categories
+                    $(".showMore").fadeOut(); // Hide "Show More" button
+                    $(".showLess").fadeIn(); // Show "Show Less" button
+                });
+            
+                $(".showLess").click(function() {
+                    $(".hidden-category").slideUp(); // Hide extra categories
+                    $(".showMore").fadeIn(); // Show "Show More" button
+                    $(".showLess").fadeOut(); // Hide "Show Less" button
+                });
+            });
+            </script>
         
     </body>
 </html>
