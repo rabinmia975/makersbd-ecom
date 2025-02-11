@@ -75,7 +75,7 @@ Route::group(['namespace'=>'Frontend', 'middleware' => ['ipcheck','check_refer']
     // cart route
     Route::post('cart/store', [ShoppingController::class, 'cart_store'])->name('cart.store');
 
-    Route::get('/add-to-cart/{id}/{qty}', [ShoppingController::class, 'addTocartGet']);
+    Route::get('/add-to-cart/{id}/{qty}', [ShoppingController::class, 'addTocartGet'])->name('addtocart');
 
     Route::get('shop/cart', [ShoppingController::class, 'cart_show'])->name('cart.show');
     Route::get('cart/remove', [ShoppingController::class, 'cart_remove'])->name('cart.remove');

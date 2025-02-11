@@ -71,8 +71,13 @@ class FrontendController extends Controller
                 $query->setRelation('products', $query->products->take(12));
                 return $query;
             });
+        $topSales = Product::where('topsale', 1)
+            ->where('status', 1)
+            ->inRandomOrder()
+            ->limit(12)
+            ->get();
         // return $homeproducts;
-        return view('frontEnd.layouts.pages.index', compact('sliders', 'frontcategory', 'hotdeal_top', 'hotdeal_bottom', 'homeproducts', 'sliderbottomads', 'footertopads'));
+        return view('frontEnd.layouts.pages.index', compact('sliders', 'frontcategory', 'hotdeal_top', 'hotdeal_bottom', 'homeproducts', 'sliderbottomads', 'footertopads', 'topSales'));
     }
 
     public function hotdeals()

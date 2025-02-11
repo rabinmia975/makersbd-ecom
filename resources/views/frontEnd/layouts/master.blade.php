@@ -231,10 +231,10 @@
                                                 <a class="text-white" href="{{route('customer.checkout')}}">
                                                     <p class="margin-shopping">
                                                         <i class="fa-solid fa-cart-shopping text-white"></i>
-                                                        <span>{{Cart::instance('shopping')->count()}}</span>
+                                                        <span id="cart-count">{{Cart::instance('shopping')->count()}}</span>
                                                     </p>
                                                 </a>
-                                                <div class="cshort-summary">
+                                                <div class="cshort-summary" id="cart-summary">
                                                     <ul>
                                                         @foreach(Cart::instance('shopping')->content() as $key=>$value)
                                                         <li>
@@ -463,7 +463,7 @@
                     <div class="row">
                         <div class="col-sm-12">
                             <div class="copyright">
-                                <p>Copyright © {{ date('Y') }} {{$generalsetting->name}}. All rights reserved | <span style="color: white;">Website Designed by: <a href="https://www.elitedesign.com.bd"><span style="color: white;">Elite Design</span></a></span></p>
+                                <p>Copyright © {{ date('Y') }} {{$generalsetting->name}}. All rights reserved | <span style="color: white;">Website Designed by: <a href=""><span style="color: white;">Inoodex.com</span></a></span></p>
                             </div>
                         </div>
                     </div>

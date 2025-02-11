@@ -12,19 +12,47 @@ class ShoppingController extends Controller
 {
 
     public function addTocartGet($id,Request $request){
-        $qty=1;
-        $productInfo = DB::table('products')->where('id',$id)->first();
-        $productImage = DB::table('productimages')->where('product_id',$id)->first();
-        $cartinfo=Cart::instance('shopping')->add(['id'=>$productInfo->id,'name'=>$productInfo->name,'qty'=>$qty,'price'=>$productInfo->new_price,
+        $qty = 1;
+        $productInfo = DB::table('products')->where('id', $id)->first();
+        $productImage = DB::table('productimages')->where('product_id', $id)->first();
+    
+        if (!$productInfo) {
+            return response()->json(['error' => 'Product not found'], 404);
+        }
+    
+        $cartinfo = Cart::instance('shopping')->add([
+            'id' => $productInfo->id,
+            'name' => $productInfo->name,
+            'qty' => $qty,
+            'price' => $productInfo->new_price,
             'options' => [
-                'image'=>$productImage->image,
-                'old_price'=>$productInfo->old_price,
-                 'slug' => $productInfo->slug,
-                 'purchase_price' => $productInfo->purchase_price,
-                 ]]);
+                'image' => $productImage->image ?? null,
+                'old_price' => $productInfo->old_price,
+                'slug' => $productInfo->slug,
+                'purchase_price' => $productInfo->purchase_price,
+            ]
+        ]);
+    
+        return response()->json([
+            'success' => true,
+            'message' => 'Product added to cart successfully!',
+            'cart_count' => Cart::instance('shopping')->count(),
+            'cart_content' => Cart::instance('shopping')->content(),
+            'cart_subtotal' => Cart::instance('shopping')->subtotal(),
+        ]);
+        // $qty=1;
+        // $productInfo = DB::table('products')->where('id',$id)->first();
+        // $productImage = DB::table('productimages')->where('product_id',$id)->first();
+        // $cartinfo=Cart::instance('shopping')->add(['id'=>$productInfo->id,'name'=>$productInfo->name,'qty'=>$qty,'price'=>$productInfo->new_price,
+        //     'options' => [
+        //         'image'=>$productImage->image,
+        //         'old_price'=>$productInfo->old_price,
+        //          'slug' => $productInfo->slug,
+        //          'purchase_price' => $productInfo->purchase_price,
+        //          ]]);
 
-        // return redirect()->back();
-        return response()->json($cartinfo);
+        // // return redirect()->back();
+        // return response()->json($cartinfo);
     } 
 
     public function cart_store(Request $request)
