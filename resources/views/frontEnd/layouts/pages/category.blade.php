@@ -74,7 +74,7 @@
 
             <div class="row">
 
-                <div class="col-sm-3 filter_sidebar">
+                <div class="col-md-3 filter_sidebar">
                     <div class="filter_close"><i class="fa fa-long-arrow-left"></i> Filter</div>
                     <form action="" class="attribute-submit">
                         <div class="sidebar_item wraper__item">
@@ -177,7 +177,7 @@
                         <!--sidebar item end-->
                     </form>
                 </div>
-                <div class="col-sm-9">
+                <div class="col-md-9">
                     <div class="category-product main_product_inner">
                         @foreach ($products as $key => $value)
                             <div class="product_item wist_item  wow fadeInDown" data-wow-duration="1.5s"
@@ -217,24 +217,48 @@
                                 </div>
 
                                 @if (!$value->prosizes->isEmpty() || !$value->procolors->isEmpty())
-                                    <div class="pro_btn">
+                                    {{-- <div class="pro_btn">
                                        
                                         <div class="cart_btn order_button">
                                             <a href="{{ route('product', $value->slug) }}"
                                                 class="addcartbutton">অর্ডার</a>
                                         </div>
 
+                                    </div> --}}
+                                    <div class="pro_btn d-flex align-items-center justify-content-between">
+                                        <div class="cart_btn">
+                                            <a class="cart_store" data-id="{{ $value->id }}">Add to
+                                                Cart</a>
+                                        </div>
+                                        <div class="cart_btn">
+                                            <a class="order_btn"
+                                                href="{{ route('product', $value->slug) }}"
+                                                class="addcartbutton">Order Now </a>
+                                        </div>
                                     </div>
+                                    
                                 @else
-                                    <div class="pro_btn">
-                                        
+                                <div class="pro_btn d-flex align-items-center justify-content-between">
+                                    <div class="cart_btn">
+                                        <a class="cart_store" data-id="{{ $value->id }}">Add to
+                                            Cart</a>
+                                    </div>
+                                    <div class="cart_btn">
+                                        {{-- <form action="{{ route('cart.store') }}" method="POST">
+                                            @csrf
+                                            <input type="hidden" name="id"
+                                                value="{{ $value->id }}" />
+                                            <input type="hidden" name="qty" value="1" />
+                                            <button class="order_btn" type="submit"></button>
+                                        </form> --}}
                                         <form action="{{ route('cart.store') }}" method="POST">
                                             @csrf
                                             <input type="hidden" name="id" value="{{ $value->id }}" />
                                             <input type="hidden" name="qty" value="1" />
-                                            <button type="submit">অর্ডার</button>
+                                            <button class="order_btn" type="submit">Order Now</button>
                                         </form>
                                     </div>
+                                </div>
                                 @endif
 
                             </div>
