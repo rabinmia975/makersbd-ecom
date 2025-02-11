@@ -37,24 +37,30 @@
                     <h4>Best Selling</h4>
                 </div>
 
-                {{--  item --}}
-                @for ($i = 0; $i < 11; $i++)
+                {{--  item --}}                
+                @foreach ($topSales as $topsale)
                     <div class="best_selling_item border rounded p-1 mb-2 position-relative overflow-hidden">
                         <div class="d-flex align-items-center">
                             <div class="item_img me-2">
-                                <a href="#" class="stretched-link">
-                                    <img src="{{ asset('public/frontEnd/images/1.png') }}" class="img-fluid"
-                                        alt="12 Colour High Quality Cable for Electronics Assem...">
+                                <a href="{{ route('product', $topsale->slug) }}" class="stretched-link">
+                                    <img src="{{ asset($topsale->image ? $topsale->image->image : '') }}" class="img-fluid"
+                                        alt="{{ $topsale->name }}">
                                 </a>
                             </div>
                             <div class="item_content">
-                                <h4>12 Colour High Quality Cable for Electronics Assem...</h4>
-                                <span><del>৳ 75</del> ৳ 60 </span>
+                                <h4>{{ Str::limit($topsale->name, 80) }}</h4>
+                                <span>
+                                    @if ($topsale->old_price)
+                                        <del>৳ {{ $topsale->old_price }}</del>
+                                    @endif
+
+                                    ৳ {{ $topsale->new_price }}
+                                    {{-- <del>৳ 75</del> ৳ 60  --}}
+                                </span>
                             </div>
                         </div>
-                    </div>
-                @endfor
-
+                    </div>                    
+                @endforeach                
             </div>
 
         </div>
@@ -544,6 +550,42 @@
                     nav: false,
                 },
             },
+        });
+    });
+</script>
+
+<script>
+    $(document).ready(function () {
+        $(".cart_store").on("click", function () {
+            var productId = $(this).data("id");
+
+            $.ajax({
+                url: "add-to-cart/" + productId + "/1",
+                type: "GET",
+                dataType: "json",
+                success: function (response) {
+                    toastr.success("Product added to cart successfully!");
+
+                    $("#cart-count").text(response.cart_count);
+
+                    var cartSummaryHtml = '<ul>';
+                    $.each(response.cart_content, function (index, item) {
+                        cartSummaryHtml += '<li><a href="#"><img src="' + item.options.image + '" alt="" /></a></li>';
+                        cartSummaryHtml += '<li><a href="#">' + item.name.substring(0, 30) + '</a></li>';
+                        cartSummaryHtml += '<li>Qty: ' + item.qty + '</li>';
+                        cartSummaryHtml += '<li><p>৳' + item.price + '</p>';
+                        cartSummaryHtml += '<button class="remove-cart cart_remove" data-id="' + item.rowId + '"><i data-feather="x"></i></button></li>';
+                    });
+                    cartSummaryHtml += '</ul>';
+                    cartSummaryHtml += '<p><strong>সর্বমোট : ৳' + response.cart_subtotal + '</strong></p>';
+                    cartSummaryHtml += '<a href="{{ route('customer.checkout') }}" class="go_cart">অর্ডার করুন</a>';
+
+                    $("#cart-summary").html(cartSummaryHtml);
+                },
+                error: function () {
+                    toastr.error("Something went wrong. Please try again.");
+                }
+            });
         });
     });
 </script>
