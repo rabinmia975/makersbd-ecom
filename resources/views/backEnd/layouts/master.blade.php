@@ -401,7 +401,7 @@
                 </div>
               </li>
               <!-- nav items end -->
-              <li class="">
+              {{-- <li class="">
                 <a href="#sidebar-api-integration" data-bs-toggle="collapse">
                   <i data-feather="save"></i>
                   <span> API Integration </span>
@@ -420,7 +420,7 @@
                     </li>
                   </ul>
                 </div>
-              </li>
+              </li> --}}
               <!-- nav items end -->
               <li>
                 <a href="#sidebar-pixel-gtm" data-bs-toggle="collapse">
@@ -499,7 +499,7 @@
         <footer class="footer">
           <div class="container-fluid">
             <div class="row">
-              <div class="col-md-12 text-end"><a href="https://www.elitedesign.com.bd" target="_blank">Website Designed by: Elite Design</a></div>
+              <div class="col-md-12 text-end"><a href="" target="_blank">Website Designed by: Inoodex.com</a></div>
             </div>
           </div>
         </footer>

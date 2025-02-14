@@ -206,7 +206,7 @@
                                                                 </div>
                                                             </div>
                                                             <div class="d-flex single_product col-sm-12">
-                                                                <input type="submit" class="btn px-4 add_cart_btn"
+                                                                <input type="submit" class="btn px-4 add_cart_btn" id=""
                                                                     onclick="return sendSuccess();" name="add_cart"
                                                                     value="কার্টে যোগ করুন " />
 

@@ -107,7 +107,7 @@
                                                     Cash On Delivery
                                                 </label>
                                             </div>
-                                            @if($bkash_gateway)
+                                            {{-- @if($bkash_gateway)
                                             <div class="form-check p_bkash">
                                                 <input class="form-check-input" type="radio" name="payment_method"
                                                 id="inlineRadio2" value="bkash" required/>
@@ -125,7 +125,7 @@
                                                     Shurjopay
                                                </label>
                                             </div>
-                                            @endif
+                                            @endif --}}
                                         </div>
                                     </div>
 

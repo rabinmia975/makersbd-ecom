@@ -217,6 +217,32 @@
                                 </div>
 
                                 @if (!$value->prosizes->isEmpty() || !$value->procolors->isEmpty())
+                                    <div class="pro_btn d-flex align-items-center justify-content-between">
+                                        <div class="cart_btn">
+                                            <a class="addcartbutton" data-id="{{ $value->id }}">Add to Cart</a>
+                                        </div>
+                                        <div class="cart_btn">
+                                            <a class="order_btn" href="{{ route('product', $value->slug) }}"
+                                                class="addcartbutton">Order Now</a>
+                                        </div>
+                                    </div>
+                                @else
+                                    <div class="pro_btn d-flex align-items-center justify-content-between">
+                                        <div class="cart_btn">
+                                            <a class="addcartbutton" data-id="{{ $value->id }}">Add to Cart</a>
+                                        </div>
+                                        <div class="cart_btn">
+                                            <form action="{{ route('cart.store') }}" method="POST">
+                                                @csrf
+                                                <input type="hidden" name="id" value="{{ $value->id }}" />
+                                                <input type="hidden" name="qty" value="1" />
+                                                <button class="order_btn" type="submit">Order Now</button>
+                                            </form>
+                                        </div>
+                                    </div>
+                                @endif
+
+                                {{-- @if (!$value->prosizes->isEmpty() || !$value->procolors->isEmpty())
                                     <div class="pro_btn">
                                        
                                         <div class="cart_btn order_button">
@@ -235,7 +261,7 @@
                                             <button type="submit">অর্ডার</button>
                                         </form>
                                     </div>
-                                @endif
+                                @endif --}}
 
                             </div>
                         @endforeach
