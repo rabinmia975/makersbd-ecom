@@ -18,6 +18,8 @@ use App\Models\Review;
 use App\Models\PaymentGateway;
 use App\Models\SmsGateway;
 use App\Models\GeneralSetting;
+use App\Models\Contact;
+use App\Mail\OrderPlacedMail;
 use Session;
 use Hash;
 use Auth;
@@ -386,8 +388,15 @@ class CustomerController extends Controller
                 'value1' => $order->id
             );
             $shurjopay_service = new ShurjopayController();
+
+            
+
             return $shurjopay_service->checkout($info);
         }else{
+
+            $admin = Contact::first();
+            $admin_email = $admin->email;
+            Mail::to($admin_email)->send(new OrderPlacedMail($order));
             return redirect('customer/order-success/'.$order->id);
         }
         
