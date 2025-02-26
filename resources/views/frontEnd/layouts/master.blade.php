@@ -301,62 +301,65 @@
                                     </ul>
                                 </div> --}}
 
-                                <div class="catagory_menu">
+                                <div class="catagory_menu" style=" {{ Request::routeIs('home') ? 'height:47px !important' : '' }}">
                                     <ul>
-                                        <li class="cat_bar active m-0">
-                                            <a href="#" class="cat_bar_bg">
-                                                <i class="fa-solid fa-bars"></i>
-                                                <span class="cat_head">All Category</span>
-                                            </a>
-                                            @if ($menucategories) 
-                                                <ul class="Cat_menu">
-                                                    <li class="Cat_list">
-                                                        <a href="{{ route('all.products') }}">
-                                                            <i class="fa-solid fa-border-all"></i>
-                                                            <span>All Product</span>
-                                                        </a>
-                                                    </li>
-                                                    @foreach($menucategories as $key => $scategory)
-                                                    <li class="Cat_list cat_list_hover {{ $key >= 10 ? 'hidden-category' : '' }}">
-                                                        <a href="{{url('category/'.$scategory->slug)}}">
-                                                            <img src="{{asset($scategory->image)}}" alt="{{$scategory->name}}" class="" />
-                                                            <span> {{$scategory->name}}</span>
-                                                            @if($scategory->subcategories->count() > 0)
-                                                                <i class="fa-solid fa-chevron-right cat_down mt-1"></i>
-                                                            @endif
-                                                        </a>
-                                                        <ul class="child_menu">
-                                                            @foreach($scategory->subcategories as $subcategory)
-                                                            <li class="child_main"><a href="{{url('subcategory/'.$subcategory->slug)}}">        {{$subcategory->subcategoryName}}</a></li> 
-                                                            @endforeach
-                                                        </ul>
-                                                    </li>
-                                                    @endforeach
-                                                    <li>
-                                                        <a href="javascript:void(0)" class="showMore"> 
-                                                            <div class="d-flex justify-content-between align-items-center">
-                                                            <span> Show More</span>
-                                                            <span>
-                                                                <i class="fa fa-angle-double-down"></i>
-                                                            </span>
-                                                        </div>
-                                                        </a>
-                                                    </li>
-                                                    <li>
-                                                        <a href="javascript:void(0)" class="showLess" style="display: none;"> 
-                                                            <div class="d-flex justify-content-between align-items-center">
-                                                                <span>Show Less</span>
+                                        @if (request()->routeIs('home')) 
+                                        <li class="cat_bar active m-0" style="max-width:270px !important;"></li>
+                                        @else
+                                            <li class="cat_bar active m-0">
+                                                <a href="#" class="cat_bar_bg">
+                                                    <i class="fa-solid fa-bars"></i>
+                                                    <span class="cat_head">All Category</span>
+                                                </a>
+                                                @if ($menucategories) 
+                                                    <ul class="Cat_menu">
+                                                        <li class="Cat_list">
+                                                            <a href="{{ route('all.products') }}">
+                                                                <i class="fa-solid fa-border-all"></i>
+                                                                <span>All Product</span>
+                                                            </a>
+                                                        </li>
+                                                        @foreach($menucategories as $key => $scategory)
+                                                        <li class="Cat_list cat_list_hover {{ $key >= 10 ? 'hidden-category' : '' }}">
+                                                            <a href="{{url('category/'.$scategory->slug)}}">
+                                                                <img src="{{asset($scategory->image)}}" alt="{{$scategory->name}}" class="" />
+                                                                <span> {{$scategory->name}}</span>
+                                                                @if($scategory->subcategories->count() > 0)
+                                                                    <i class="fa-solid fa-chevron-right cat_down mt-1"></i>
+                                                                @endif
+                                                            </a>
+                                                            <ul class="child_menu">
+                                                                @foreach($scategory->subcategories as $subcategory)
+                                                                <li class="child_main"><a href="{{url('subcategory/'.$subcategory->slug)}}">        {{$subcategory->subcategoryName}}</a></li> 
+                                                                @endforeach
+                                                            </ul>
+                                                        </li>
+                                                        @endforeach
+                                                        <li>
+                                                            <a href="javascript:void(0)" class="showMore"> 
+                                                                <div class="d-flex justify-content-between align-items-center">
+                                                                <span> Show More</span>
                                                                 <span>
-                                                                    <i class="fa fa-angle-double-up"></i>
+                                                                    <i class="fa fa-angle-double-down"></i>
                                                                 </span>
                                                             </div>
-                                                        </a>
-                                                    </li>
-                                                </ul>
-                                            @endif
-                                        </li>
-                                        
-                                         
+                                                            </a>
+                                                        </li>
+                                                        <li>
+                                                            <a href="javascript:void(0)" class="showLess" style="display: none;"> 
+                                                                <div class="d-flex justify-content-between align-items-center">
+                                                                    <span>Show Less</span>
+                                                                    <span>
+                                                                        <i class="fa fa-angle-double-up"></i>
+                                                                    </span>
+                                                                </div>
+                                                            </a>
+                                                        </li>
+                                                    </ul>
+                                                @endif
+                                            </li>
+                                        @endif
+                                            
                                         <li class="active"><a  href="{{ route('home') }}" class="hover_effect active">Home</a></li>
                                         <li><a href="{{ route('all.products') }}" class="hover_effect">All Products</a></li>
                                         <li class="parent-category">
@@ -364,10 +367,10 @@
                                                 Order Track
                                             </a>
                                         </li>
-
-                                    </ul>
-                                </div>
-
+    
+                                        </ul>
+                                    </div>
+                               
                             </div>
                         </div>
                     </div>
@@ -571,15 +574,7 @@
 
 
 
-
-
-
-
-
-
-
-        
-        <div class="whatapp" style="position: fixed; bottom: 80px; right: 32px;">
+        <div class="whatapp" style="position: fixed; bottom: 80px; right: 32px; z-index: 9999999 !important;">
             <a href="https://wa.me/88{{$contact->hotline}}">
                 <i class="fa-brands fa-whatsapp" style="font-size:48px;color:green"></i>
             <a />

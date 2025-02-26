@@ -14,10 +14,9 @@
 @push('css')
 <style>
     .main-header .menu-area .cat_bar.active .Cat_menu {
-    visibility: visible;
-    opacity: 1;
-}
-
+        visibility: visible;
+        opacity: 1;
+    }
 </style>
 <link rel="stylesheet" href="{{ asset('public/frontEnd/css/owl.carousel.min.css') }}" />
 <link rel="stylesheet" href="{{ asset('public/frontEnd/css/owl.theme.default.min.css') }}" />
@@ -31,20 +30,83 @@
     <div class="row g-3">
         <div class="col-lg-3 col-xl-2 d-none d-lg-block">
 
+            <div style="margin-top: -51px;">
+
+                <div class="catagory_menu" style="height:100% !important;">
+                    <ul style="background: #fff;">
+                        <li class="cat_bar active m-0 w-100" style="max-width:100% !important; background:none !important;">
+                            <a href="#" class="cat_bar_bg">
+                                <i class="fa-solid fa-bars"></i>
+                                <span class="cat_head">All Category</span>
+                            </a>
+                            @if ($menucategories)
+                                <ul class="Cat_menu" style="width:100% !important">
+                                    <li class="Cat_list">
+                                        <a href="{{ route('all.products') }}">
+                                            <i class="fa-solid fa-border-all"></i>
+                                            <span>All Product</span>
+                                        </a>
+                                    </li>
+                                    @foreach ($menucategories as $key => $scategory)
+                                        <li class="Cat_list cat_list_hover {{ $key >= 10 ? 'hidden-category' : '' }}">
+                                            <a href="{{ url('category/' . $scategory->slug) }}">
+                                                <img src="{{ asset($scategory->image) }}" alt="{{ $scategory->name }}"
+                                                    class="" />
+                                                <span> {{ $scategory->name }}</span>
+                                                @if ($scategory->subcategories->count() > 0)
+                                                    <i class="fa-solid fa-chevron-right cat_down mt-1"></i>
+                                                @endif
+                                            </a>
+                                            <ul class="child_menu">
+                                                @foreach ($scategory->subcategories as $subcategory)
+                                                    <li class="child_main"><a
+                                                            href="{{ url('subcategory/' . $subcategory->slug) }}">
+                                                            {{ $subcategory->subcategoryName }}</a></li>
+                                                @endforeach
+                                            </ul>
+                                        </li>
+                                    @endforeach
+                                    <li>
+                                        <a href="javascript:void(0)" class="showMore">
+                                            <div class="d-flex justify-content-between align-items-center">
+                                                <span> Show More</span>
+                                                <span>
+                                                    <i class="fa fa-angle-double-down"></i>
+                                                </span>
+                                            </div>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="javascript:void(0)" class="showLess" style="display: none;">
+                                            <div class="d-flex justify-content-between align-items-center">
+                                                <span>Show Less</span>
+                                                <span>
+                                                    <i class="fa fa-angle-double-up"></i>
+                                                </span>
+                                            </div>
+                                        </a>
+                                    </li>
+                                </ul>
+                            @endif
+                        </li>
+                    </ul>
+                </div>
+
+            </div>
             {{-- best selling --}}
             <div class="best_selling_sec bg-white mt-3 p-2">
                 <div class="sec_title mb-2">
                     <h4>Best Selling</h4>
                 </div>
 
-                {{--  item --}}                
+                {{--  item --}}
                 @foreach ($topSales as $topsale)
                     <div class="best_selling_item border rounded p-1 mb-2 position-relative overflow-hidden">
                         <div class="d-flex align-items-center">
                             <div class="item_img me-2">
                                 <a href="{{ route('product', $topsale->slug) }}" class="stretched-link">
-                                    <img src="{{ asset($topsale->image ? $topsale->image->image : '') }}" class="img-fluid"
-                                        alt="{{ $topsale->name }}">
+                                    <img src="{{ asset($topsale->image ? $topsale->image->image : '') }}"
+                                        class="img-fluid" alt="{{ $topsale->name }}">
                                 </a>
                             </div>
                             <div class="item_content">
@@ -59,8 +121,8 @@
                                 </span>
                             </div>
                         </div>
-                    </div>                    
-                @endforeach                
+                    </div>
+                @endforeach
             </div>
 
         </div>
@@ -315,10 +377,11 @@
                                             <div class="">
                                                 <span class="section-title-name"> {{ $homecat->name }} </span>
                                             </div>
-    
+
                                             <div class="">
-                                                <a href="{{ route('category', $homecat->slug) }}" class="view_more_btn">View
-                                                    More</a> 
+                                                <a href="{{ route('category', $homecat->slug) }}"
+                                                    class="view_more_btn">View
+                                                    More</a>
                                             </div>
                                         </div>
                                     </h3>
@@ -408,7 +471,8 @@
                                                             <input type="hidden" name="id"
                                                                 value="{{ $value->id }}" />
                                                             <input type="hidden" name="qty" value="1" />
-                                                            <button class="order_btn" type="submit">Order Now</button>
+                                                            <button class="order_btn" type="submit">Order
+                                                                Now</button>
                                                         </form>
                                                     </div>
                                                 </div>
@@ -555,34 +619,40 @@
 </script>
 
 <script>
-    $(document).ready(function () {
-        $(".cart_store").on("click", function () {
+    $(document).ready(function() {
+        $(".cart_store").on("click", function() {
             var productId = $(this).data("id");
 
             $.ajax({
                 url: "add-to-cart/" + productId + "/1",
                 type: "GET",
                 dataType: "json",
-                success: function (response) {
+                success: function(response) {
                     toastr.success("Product added to cart successfully!");
 
                     $("#cart-count").text(response.cart_count);
 
                     var cartSummaryHtml = '<ul>';
-                    $.each(response.cart_content, function (index, item) {
-                        cartSummaryHtml += '<li><a href="#"><img src="' + item.options.image + '" alt="" /></a></li>';
-                        cartSummaryHtml += '<li><a href="#">' + item.name.substring(0, 30) + '</a></li>';
+                    $.each(response.cart_content, function(index, item) {
+                        cartSummaryHtml += '<li><a href="#"><img src="' + item
+                            .options.image + '" alt="" /></a></li>';
+                        cartSummaryHtml += '<li><a href="#">' + item.name.substring(
+                            0, 30) + '</a></li>';
                         cartSummaryHtml += '<li>Qty: ' + item.qty + '</li>';
                         cartSummaryHtml += '<li><p>৳' + item.price + '</p>';
-                        cartSummaryHtml += '<button class="remove-cart cart_remove" data-id="' + item.rowId + '"><i data-feather="x"></i></button></li>';
+                        cartSummaryHtml +=
+                            '<button class="remove-cart cart_remove" data-id="' +
+                            item.rowId + '"><i data-feather="x"></i></button></li>';
                     });
                     cartSummaryHtml += '</ul>';
-                    cartSummaryHtml += '<p><strong>সর্বমোট : ৳' + response.cart_subtotal + '</strong></p>';
-                    cartSummaryHtml += '<a href="{{ route('customer.checkout') }}" class="go_cart">অর্ডার করুন</a>';
+                    cartSummaryHtml += '<p><strong>সর্বমোট : ৳' + response.cart_subtotal +
+                        '</strong></p>';
+                    cartSummaryHtml +=
+                        '<a href="{{ route('customer.checkout') }}" class="go_cart">অর্ডার করুন</a>';
 
                     $("#cart-summary").html(cartSummaryHtml);
                 },
-                error: function () {
+                error: function() {
                     toastr.error("Something went wrong. Please try again.");
                 }
             });
