@@ -368,7 +368,7 @@
                                                 </li>
                                                 <li><a href="{{ route('all.products') }}" class="hover_effect {{ Request::routeIs('all.products') ? 'active' : '' }}">All Products</a></li>
                                                 <li class="parent-category">
-                                                    <a href="{{route('customer.order_track')}}" class="menu-category-name">
+                                                    <a href="{{route('customer.order_track')}}" class="menu-category-name {{ Request::routeIs('customer.order_track') ? 'active' : '' }}">
                                                         Order Track
                                                     </a>
                                                 </li>

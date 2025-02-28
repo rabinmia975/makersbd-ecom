@@ -1,5 +1,10 @@
 @extends('frontEnd.layouts.master') @section('title', 'Shopping Cart') @section('content')
  
+<style>
+    .catagory_menu ul li a {
+    padding: 15px 12px;
+}
+</style>
 
 <div class="bg-whtie py-3" style="background:#fff;">
     <div class="container">
