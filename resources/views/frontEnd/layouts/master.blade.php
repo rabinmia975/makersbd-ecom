@@ -260,7 +260,7 @@
                     </div>
                 </div>
 
-                <div class="menu-area d-none d-lg-block">
+                <div class="menu-area">
                     <div class="container">
                         <div class="row">
                             <div class="col-sm-12">
@@ -303,7 +303,9 @@
 
                                 <div class="catagory_menu" style=" {{ Request::routeIs('home') ? 'height:47px !important' : '' }}">
                                     <ul>
-                                        @if (request()->routeIs('home')) 
+                                        <div class="row g-0">
+                                             <div class="col-lg-3 col-xl-2 d-none d-lg-block">
+                                                @if (request()->routeIs('home')) 
                                         <li class="cat_bar active m-0" style="max-width:270px !important;"></li>
                                         @else
                                             <li class="cat_bar active m-0">
@@ -359,18 +361,22 @@
                                                 @endif
                                             </li>
                                         @endif
-                                            
-                                        <li class="active"><a  href="{{ route('home') }}" class="hover_effect active">Home</a></li>
-                                        <li><a href="{{ route('all.products') }}" class="hover_effect">All Products</a></li>
-                                        <li class="parent-category">
-                                            <a href="{{route('customer.order_track')}}" class="menu-category-name">
-                                                Order Track
-                                            </a>
-                                        </li>
-    
-                                        </ul>
-                                    </div>
-                               
+                                             </div>
+                                             <div class="col-lg-9 col-xl-10">
+                                                <li class="active">
+                                                    <a  href="{{ route('home') }}" class="hover_effect ms-0 {{ Request::routeIs('home') ? 'active' : '' }}">Home</a>
+                                                </li>
+                                                <li><a href="{{ route('all.products') }}" class="hover_effect {{ Request::routeIs('all.products') ? 'active' : '' }}">All Products</a></li>
+                                                <li class="parent-category">
+                                                    <a href="{{route('customer.order_track')}}" class="menu-category-name">
+                                                        Order Track
+                                                    </a>
+                                                </li>
+                                             </div>
+                                        </div>
+                                       
+                                    </ul>
+                                </div>
                             </div>
                         </div>
                     </div>
