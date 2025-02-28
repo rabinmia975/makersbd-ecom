@@ -3001,9 +3001,10 @@ section.product-inner {
 }
 
 .pro_img {
-    height: 200px;
+    height: 250px;
     position: relative;
     overflow: hidden;
+    text-align: center;
 }
 
 .pro_img>a {
@@ -3013,7 +3014,7 @@ section.product-inner {
 
 .pro_img img {
     height: 100%;
-    width: 100%;
+    /* width: 100%; */
     /*object-fit: contain;*/
     transition: 0.35s all;
 }

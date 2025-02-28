@@ -320,7 +320,7 @@
                                                             </a>
                                                         </li>
                                                         @foreach($menucategories as $key => $scategory)
-                                                        <li class="Cat_list cat_list_hover {{ $key >= 10 ? 'hidden-category' : '' }}">
+                                                        <li class="Cat_list cat_list_hover {{ $key >= 8 ? 'hidden-category' : '' }}">
                                                             <a href="{{url('category/'.$scategory->slug)}}">
                                                                 <img src="{{asset($scategory->image)}}" alt="{{$scategory->name}}" class="" />
                                                                 <span> {{$scategory->name}}</span>
@@ -335,8 +335,8 @@
                                                             </ul>
                                                         </li>
                                                         @endforeach
-                                                        <li>
-                                                            <a href="javascript:void(0)" class="showMore"> 
+                                                        <li class="showMore">
+                                                            <a href="javascript:void(0)"> 
                                                                 <div class="d-flex justify-content-between align-items-center">
                                                                 <span> Show More</span>
                                                                 <span>
@@ -345,8 +345,8 @@
                                                             </div>
                                                             </a>
                                                         </li>
-                                                        <li>
-                                                            <a href="javascript:void(0)" class="showLess" style="display: none;"> 
+                                                        <li class="showLess" style="display: none;">
+                                                            <a href="javascript:void(0)"> 
                                                                 <div class="d-flex justify-content-between align-items-center">
                                                                     <span>Show Less</span>
                                                                     <span>

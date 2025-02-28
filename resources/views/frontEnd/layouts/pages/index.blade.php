@@ -30,7 +30,7 @@
     <div class="row g-3">
         <div class="col-lg-3 col-xl-2 d-none d-lg-block">
 
-            <div style="margin-top: -51px;">
+            <div style="margin-top: -51px;margin-bottom: 11px;">
 
                 <div class="catagory_menu" style="height:100% !important;">
                     <ul style="background: #fff;">
@@ -48,7 +48,7 @@
                                         </a>
                                     </li>
                                     @foreach ($menucategories as $key => $scategory)
-                                        <li class="Cat_list cat_list_hover {{ $key >= 10 ? 'hidden-category' : '' }}">
+                                        <li class="Cat_list cat_list_hover {{ $key >= 8 ? 'hidden-category' : '' }}">
                                             <a href="{{ url('category/' . $scategory->slug) }}">
                                                 <img src="{{ asset($scategory->image) }}" alt="{{ $scategory->name }}"
                                                     class="" />
@@ -66,8 +66,8 @@
                                             </ul>
                                         </li>
                                     @endforeach
-                                    <li>
-                                        <a href="javascript:void(0)" class="showMore">
+                                    <li class="showMore">
+                                        <a href="javascript:void(0)">
                                             <div class="d-flex justify-content-between align-items-center">
                                                 <span> Show More</span>
                                                 <span>
@@ -76,8 +76,8 @@
                                             </div>
                                         </a>
                                     </li>
-                                    <li>
-                                        <a href="javascript:void(0)" class="showLess" style="display: none;">
+                                    <li class="showLess" style="display: none;">
+                                        <a href="javascript:void(0)">
                                             <div class="d-flex justify-content-between align-items-center">
                                                 <span>Show Less</span>
                                                 <span>
@@ -94,7 +94,7 @@
 
             </div>
             {{-- best selling --}}
-            <div class="best_selling_sec bg-white mt-3 p-2">
+            <div class="best_selling_sec bg-white p-2">
                 <div class="sec_title mb-2">
                     <h4>Best Selling</h4>
                 </div>
